@@ -6,4 +6,51 @@
     text-align: center;
     line-height: 50px;  /* new thing learned... */
     cursor: pointer;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    align-items: center;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: black;
+    text-align: center;
+}
+
+/* .die-1 .dot-1, .dot-2, .dot-3, .dot-4, .dot-6, .dot-7, .dot-8, .dot-9 {
+    visibility: hidden;
+} */
+
+.die-1 .cell:not(:nth-child(5)){
+    visibility: hidden;
+}
+
+.die-2 .cell:not(:first-child):not(:last-child) {
+    visibility: hidden;
+}
+
+.die-3 .cell:not(:first-child):not(:last-child):not(:nth-child(5)) {
+    visibility: hidden;
+}
+
+.die-4 .cell:nth-child(2n),
+.die-4 .cell:nth-child(5) {
+    visibility: hidden;
+}
+
+.die-5 .cell:nth-child(2n) {
+    visibility: hidden;
+}
+
+.die-6 .cell:nth-child(2),
+.die-6 .cell:nth-child(5),
+.die-6 .cell:nth-child(8) {
+    visibility: hidden;
 }

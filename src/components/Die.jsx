@@ -12,7 +12,6 @@ const Die = ({id, value, isHeld, holdDice}) => {
     cellElements.push(<Cell key={i}/>);
   }
 
-  console.log(cellElements);
   return (
     <div className={`die-face die-${value}`} style={styles} onClick={holdDice}>
       {cellElements}

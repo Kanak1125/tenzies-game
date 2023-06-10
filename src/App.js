@@ -11,10 +11,10 @@ function App() {
   const [timer, setTimer] = useState(0);
 
   const storedBestTime = localStorage.getItem('best_timer');
-  const [bestTime, setBestTime] = useState(JSON.parse(storedBestTime) || 0);
+  const [bestTime, setBestTime] = useState(() => JSON.parse(storedBestTime) || 0);  // using function inside the state to render only once when the page is rendered...
 
   const storedLeastRolls = localStorage.getItem('least_rolls');
-  const [leastRolls, setLeastRolls] = useState(JSON.parse(storedLeastRolls) || 0);
+  const [leastRolls, setLeastRolls] = useState(() => JSON.parse(storedLeastRolls) || 0);
 
   useEffect(() => {
     const allHeld = diceNumbArr.every(die => die.isHeld); // every() array method checks every dice, if every is held the method returns 'true' else 'false'... 

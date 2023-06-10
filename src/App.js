@@ -1,6 +1,3 @@
-// The problem is with the bestTimer and leastRolls
-// when the key is not defined, the timer is not setting to 0...
-
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import Die from './components/Die';
@@ -14,19 +11,10 @@ function App() {
   const [timer, setTimer] = useState(0);
 
   const storedBestTime = localStorage.getItem('best_timer');
-  const [bestTime, setBestTime] = useState(
-    storedBestTime ? JSON.parse(storedBestTime) : 0
-    );
-    // also tried the following but didn't work...
-// const [bestTime, setBestTime] = useState(storedBestTime || 0);
-// if 'key' in localStorage is not defined it returns NULL so the state will be initialized to '0'...
+  const [bestTime, setBestTime] = useState(JSON.parse(storedBestTime) || 0);
 
-  // console.log(bestTime);
   const storedLeastRolls = localStorage.getItem('least_rolls');
-  const [leastRolls, setLeastRolls] = useState(
-    storedLeastRolls ? JSON.parse(storedLeastRolls) : 0
-  );
-  console.log(countRoll, leastRolls);
+  const [leastRolls, setLeastRolls] = useState(JSON.parse(storedLeastRolls) || 0);
 
   useEffect(() => {
     const allHeld = diceNumbArr.every(die => die.isHeld); // every() array method checks every dice, if every is held the method returns 'true' else 'false'... 
@@ -37,9 +25,9 @@ function App() {
 
     if (allHeld && allSameValue) {
       setTenzies(true);
-      if (timer < bestTime) localStorage.setItem('best_timer', JSON.stringify(timer));
-      // setHasRoll(false);
-      if (countRoll < leastRolls) localStorage.setItem('least_rolls', JSON.stringify(countRoll));
+      if (timer < bestTime || bestTime <= 0) localStorage.setItem('best_timer', JSON.stringify(timer));
+      // set the timer and leastRolls if it is the first time when the bestTime and leastRolls are 0s with "|| besTime <= 0"...
+      if (countRoll < leastRolls || leastRolls <= 0) localStorage.setItem('least_rolls', JSON.stringify(countRoll));
     }
   }, [diceNumbArr]);
 
@@ -146,3 +134,5 @@ function App() {
 }
 
 export default App;
+
+/* initial state of bestTimer and leastRolls are not set to 0...*/
